@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI FoodSaver helps households and students manage food, track expiry dates and reduce food waste." />
+  <title>AI FoodSaver | Smart Food Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="AI FoodSaver home">
+        <span class="brand-mark">✳</span>
+        <span>food<span class="brand-accent">saver</span><small>SMART FOOD MANAGEMENT</small></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="nav">
+        <button class="nav-link active" data-view="overview"><span>▦</span> Overview</button>
+        <button class="nav-link" data-view="inventory"><span>▤</span> My inventory <b id="nav-count">0</b></button>
+        <button class="nav-link" data-view="expiry"><span>◷</span> Expiry tracker</button>
+        <button class="nav-link" data-view="recipes"><span>✧</span> Recipe ideas</button>
+        <button class="nav-link" data-view="insights"><span>⌁</span> Insights</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="tip-card">
+          <div class="tip-icon">♧</div>
+          <strong>Small steps matter.</strong>
+          <p>Plan your meals, use what you have, and make every ingredient count.</p>
+        </div>
+        <div class="profile">
+          <div class="avatar">FS</div>
+          <div><strong>FoodSaver user</strong><small>Personal workspace</small></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" aria-label="Toggle menu">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="breadcrumb-current">Overview</strong></div>
+        <div class="top-actions"><span class="today" id="today-label"></span><button class="icon-btn" id="quick-add" title="Add food">＋</button></div>
+      </header>
+
+      <section class="view active" id="view-overview">
+        <div class="welcome-row">
+          <div><div class="eyebrow">YOUR SMART KITCHEN COMPANION</div><h1>Good food. Less waste<span class="purple-dot">.</span></h1><p class="subheading">A little planning today can make a big difference tomorrow.</p></div>
+          <button class="primary-btn" id="add-food-main">＋ Add food item</button>
+        </div>
+        <div class="hero-banner">
+          <div class="hero-copy"><span class="hero-tag">✦ YOUR DAILY FOOD CHECK-IN</span><h2>Make the most of<br>what you already have.</h2><p>Check what needs attention and discover a delicious way to use it.</p><button class="light-btn" data-go="expiry">Review expiring items <span>→</span></button></div>
+          <div class="hero-art" aria-hidden="true"><div class="art-circle"></div><div class="art-leaf leaf-one">❧</div><div class="art-leaf leaf-two">❧</div><div class="art-fruit fruit-one">🍊</div><div class="art-fruit fruit-two">🥑</div><div class="art-fruit fruit-three">🍅</div><div class="art-spark">✦</div></div>
+        </div>
+        <div class="section-heading"><div><h3>Your kitchen at a glance</h3><p>Live summary of your food inventory</p></div><span class="muted-small" id="last-updated">Updated just now</span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon lavender">▤</span><span class="stat-caption">IN YOUR KITCHEN</span></div><strong id="stat-total">0</strong><p>Food items tracked</p><div class="stat-foot"><span class="dot purple"></span> Across your inventory</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon peach">◷</span><span class="stat-caption">NEEDS ATTENTION</span></div><strong id="stat-expiring">0</strong><p>Expiring in 3 days</p><div class="stat-foot"><span class="dot orange"></span> Check these first</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon mint">♡</span><span class="stat-caption">FOOD RESCUED</span></div><strong id="stat-rescued">0</strong><p>Items marked as used</p><div class="stat-foot"><span class="dot green"></span> Your positive impact</div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon blue">₹</span><span class="stat-caption">ESTIMATED VALUE</span></div><strong id="stat-value">₹0</strong><p>Value of tracked food</p><div class="stat-foot"><span class="dot blue-dot"></span> Based on entered prices</div></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel inventory-panel"><div class="panel-heading"><div><h3>Expiring soon</h3><p>Use these ingredients first</p></div><button class="text-btn" data-go="expiry">View all →</button></div><div id="overview-expiry" class="compact-list"></div></article>
+          <article class="panel action-panel"><div class="panel-heading"><div><h3>Smart suggestions</h3><p>Simple ways to waste less</p></div><span class="sparkle">✧</span></div><div id="smart-tip" class="smart-tip"><div class="tip-emoji">🥬</div><div><strong>Start with your inventory</strong><p>Add a few food items to receive useful suggestions.</p></div></div><button class="outline-btn full" data-go="recipes">Explore recipe ideas <span>→</span></button></article>
+        </div>
+      </section>
+
+      <section class="view" id="view-inventory">
+        <div class="page-heading"><div><div class="eyebrow">KEEP EVERYTHING IN ONE PLACE</div><h1>My inventory</h1><p class="subheading">Know what you have before you shop or cook.</p></div><button class="primary-btn" id="add-food-inventory">＋ Add food item</button></div>
+        <div class="toolbar"><div class="search-box"><span>⌕</span><input id="inventory-search" type="search" placeholder="Search your food..." /></div><select id="category-filter"><option value="all">All categories</option><option>Fruits</option><option>Vegetables</option><option>Dairy</option><option>Grains</option><option>Other</option></select><select id="sort-filter"><option value="expiry">Sort: Expiry date</option><option value="name">Sort: Name</option><option value="newest">Sort: Recently added</option></select></div>
+        <div class="panel table-panel"><div class="table-wrap"><table><thead><tr><th>FOOD ITEM</th><th>CATEGORY</th><th>QUANTITY</th><th>EXPIRY DATE</th><th>STATUS</th><th></th></tr></thead><tbody id="inventory-body"></tbody></table></div><div id="inventory-empty" class="empty-state"><div>🥗</div><strong>Your inventory is waiting</strong><p>Add your first food item to get started.</p><button class="primary-btn" id="empty-add">＋ Add first item</button></div></div>
+        <p class="disclaimer">Reminder: expiry tracking uses the date entered by you. It does not determine whether food is safe to eat.</p>
+      </section>
+
+      <section class="view" id="view-expiry">
+        <div class="page-heading"><div><div class="eyebrow">USE IT BEFORE YOU LOSE IT</div><h1>Expiry tracker</h1><p class="subheading">Prioritise ingredients based on the dates you entered.</p></div><div class="date-pill">◷ Date-based reminders</div></div>
+        <div class="expiry-summary" id="expiry-summary"></div>
+        <div class="panel"><div class="panel-heading"><div><h3>Items that need attention</h3><p>Items are sorted by the nearest entered expiry date.</p></div></div><div id="expiry-list" class="expiry-list"></div></div>
+        <p class="disclaimer">Food safety depends on storage, handling and product-specific guidance. Do not rely on this tracker alone to decide whether food is safe.</p>
+      </section>
+
+      <section class="view" id="view-recipes">
+        <div class="page-heading"><div><div class="eyebrow">TURN INGREDIENTS INTO INSPIRATION</div><h1>Recipe ideas</h1><p class="subheading">Discover simple ideas using items in your inventory.</p></div><span class="date-pill">✧ Ingredient matching</span></div>
+        <div class="recipe-intro"><div><span class="hero-tag">FOOD RESCUE MODE</span><h2>Cook with what you have.</h2><p>Suggestions are matched to your tracked ingredients. Always check ingredient freshness and food safety before cooking.</p></div><div class="recipe-illustration">🥘</div></div>
+        <div class="section-heading"><div><h3>Suggested for your kitchen</h3><p id="recipe-count">Based on your current inventory</p></div><button class="outline-btn" id="refresh-recipes">↻ Refresh ideas</button></div>
+        <div class="recipe-grid" id="recipe-grid"></div>
+      </section>
+
+      <section class="view" id="view-insights">
+        <div class="page-heading"><div><div class="eyebrow">UNDERSTAND YOUR HABITS</div><h1>Food insights</h1><p class="subheading">A simple snapshot of your food management activity.</p></div><span class="date-pill">⌁ Personal analytics</span></div>
+        <div class="stats-grid insight-stats">
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon lavender">▤</span><span class="stat-caption">CURRENT ITEMS</span></div><strong id="insight-total">0</strong><p>Items in inventory</p></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon mint">♡</span><span class="stat-caption">MARKED AS USED</span></div><strong id="insight-used">0</strong><p>Items rescued/used</p></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon peach">!</span><span class="stat-caption">PAST ENTERED DATE</span></div><strong id="insight-past">0</strong><p>Review these items</p></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel"><div class="panel-heading"><div><h3>Inventory by category</h3><p>Current items in each category</p></div></div><div id="category-chart" class="bar-chart"></div></article>
+          <article class="panel"><div class="panel-heading"><div><h3>Your activity</h3><p>Food items marked as used</p></div></div><div class="impact-box"><div class="impact-icon">🌱</div><strong id="impact-number">0</strong><span>items marked as used</span><p>Every item you use thoughtfully is a step towards reducing avoidable food waste.</p></div></article>
+        </div>
+        <div class="panel note-panel"><strong>About these insights</strong><p>This prototype calculates summaries from the items and actions you enter. It does not yet train a predictive machine-learning model or verify actual food waste. Use real project data for your final evaluation.</p></div>
+      </section>
+
+      <footer class="footer">AI FoodSaver <span>•</span> Smart choices for a less wasteful kitchen <span class="footer-right">Prototype v1.0</span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="food-modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-header"><div><div class="eyebrow">UPDATE YOUR KITCHEN</div><h2 id="modal-title">Add food item</h2></div><button class="close-btn" id="close-modal" aria-label="Close">×</button></div>
+      <form id="food-form">
+        <input type="hidden" id="food-id">
+        <label>Food name<input id="food-name" required maxlength="45" placeholder="e.g. Fresh apples"></label>
+        <div class="form-row"><label>Category<select id="food-category" required><option>Fruits</option><option>Vegetables</option><option>Dairy</option><option>Grains</option><option>Other</option></select></label><label>Quantity<input id="food-quantity" required type="number" min="0.1" step="0.1" value="1"></label></div>
+        <div class="form-row"><label>Unit<select id="food-unit"><option>pcs</option><option>kg</option><option>g</option><option>litres</option><option>packets</option></select></label><label>Expiry date<input id="food-expiry" type="date"></label></div>
+        <label>Estimated total value (₹)<input id="food-price" type="number" min="0" step="0.01" placeholder="e.g. 80"></label>
+        <div class="form-actions"><button type="button" class="outline-btn" id="cancel-modal">Cancel</button><button type="submit" class="primary-btn">Save item</button></div>
+      </form>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
